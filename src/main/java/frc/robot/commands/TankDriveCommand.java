@@ -23,7 +23,7 @@ public class TankDriveCommand extends Command {
     // Use addRequirements() here to declare subsystem dependencies.
 
     this.driveSubsystem = driveSubsystem;
-    addRequirements(driveSubsystem);
+    addRequirements(this.driveSubsystem);
 
 
     this.leftSupplier = leftSupplier;
