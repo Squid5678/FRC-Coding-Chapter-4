@@ -5,9 +5,9 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.ArcadeDriveCommand;
 import frc.robot.commands.IntakeEjectCommand;
 import frc.robot.commands.RunIntakeCommand;
-import frc.robot.commands.TankDriveCommand;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.TankDriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -46,9 +46,9 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    driveSubsystem.setDefaultCommand(new TankDriveCommand(driveSubsystem, 
+    driveSubsystem.setDefaultCommand(new ArcadeDriveCommand(driveSubsystem, 
                                     () -> -m_driverController.getLeftY(), 
-                                    () -> -m_driverController.getRightY()));
+                                    () -> -m_driverController.getRightX()));
     m_driverController.button(2).whileTrue(new RunIntakeCommand(intakeSubsystem));
     m_driverController.button(3).toggleOnTrue(new IntakeEjectCommand(intakeSubsystem));
   }

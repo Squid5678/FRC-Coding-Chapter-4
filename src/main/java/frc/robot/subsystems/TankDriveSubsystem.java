@@ -5,10 +5,10 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
-import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.hardware.TalonFX;
 
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.TankDriveConstants;
@@ -20,6 +20,9 @@ public class TankDriveSubsystem extends SubsystemBase {
 
   private TalonFX rightPrimary = new TalonFX(TankDriveConstants.rightPrimaryID);
   private TalonFX rightFollower = new TalonFX(TankDriveConstants.rightFollowerID);
+
+  /* Declare Differential Drive object */
+  private DifferentialDrive kDrive;
 
 
   /*
@@ -44,6 +47,11 @@ public class TankDriveSubsystem extends SubsystemBase {
     /* Following the primary */
     leftFollower.setControl(new Follower(TankDriveConstants.leftPrimaryID, false));
     rightFollower.setControl(new Follower(TankDriveConstants.rightPrimaryID, false));
+
+    /* Initialize Differential Drive object here -- be sure to do so once motor followers are set!
+     * (NOTE: this is usually done because of the way other code libraries work with the DifferentialDrive object.)
+     */
+    kDrive = new DifferentialDrive(leftPrimary, rightPrimary);
 
   }
 
@@ -83,7 +91,13 @@ public class TankDriveSubsystem extends SubsystemBase {
     rightPrimary.stopMotor();
   }
 
-
+  /**
+   * Method to get the DifferentialDrive object.
+   * @return a DifferentialDrive object, to be accessed by other commands. 
+   */
+  public DifferentialDrive getKDrive() {
+    return kDrive;
+  }
 
   /* 
    * GETTERS SECTION 
