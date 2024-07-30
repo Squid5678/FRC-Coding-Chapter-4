@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -15,5 +18,22 @@ package frc.robot;
 public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
+  }
+
+  public static class TankDriveConstants{
+
+    public static final int leftPrimaryID = 1;
+    public static final int leftFollowerID = 2;
+
+    public static final int rightPrimaryID = 3;
+    public static final int rightFollowerID = 4;
+
+    public static final TalonFXConfiguration configs = new TalonFXConfiguration();
+
+    public static final CurrentLimitsConfigs currentLimits = new CurrentLimitsConfigs()
+    .withStatorCurrentLimit(80)
+    .withStatorCurrentLimitEnable(true)
+    .withSupplyCurrentLimitEnable(true);
+    
   }
 }
