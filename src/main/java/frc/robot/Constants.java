@@ -48,4 +48,15 @@ public final class Constants {
         .withStatorCurrentLimitEnable(true)
         .withSupplyCurrentLimitEnable(true);
   }
+
+  public static class ShooterConstants {
+    public static final int shooterPrimaryID = 6;
+    public static final int shooterFollowerID = 7;
+    public static final TalonFXConfiguration configs = new TalonFXConfiguration();
+    public static final CurrentLimitsConfigs currentLimits = new CurrentLimitsConfigs()
+        .withStatorCurrentLimit(80)
+        .withStatorCurrentLimitEnable(true)
+        .withSupplyCurrentLimitEnable(true);
+    
+  }
 }
