@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import java.util.function.DoubleSupplier;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.TankDriveSubsystem;
 
@@ -37,7 +38,12 @@ public class TankDriveCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveSubsystem.drive(leftSupplier.getAsDouble(), rightSupplier.getAsDouble());
+    // driveSubsystem.drive(leftSupplier.getAsDouble(), rightSupplier.getAsDouble()); //No deadband
+    double leftPercentDeadbanded = MathUtil.applyDeadband(leftSupplier.getAsDouble(), 0.07);
+    double rightPercentDeadbanded = MathUtil.applyDeadband(rightSupplier.getAsDouble(), 0.07);
+
+
+    driveSubsystem.drive(leftPercentDeadbanded, rightPercentDeadbanded);
   }
 
   // Called once the command ends or is interrupted.
