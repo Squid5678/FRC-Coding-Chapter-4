@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import java.util.function.DoubleSupplier;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.TankDriveSubsystem;
 
@@ -33,7 +34,9 @@ public class ArcadeDriveCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveSubsystem.getKDrive().arcadeDrive(translateSupplier.getAsDouble(), rotationalSupplier.getAsDouble());
+    double translatePercentDeadbanded = MathUtil.applyDeadband(translateSupplier.getAsDouble(), 0.07);
+    double rotationPercentDeadbanded = MathUtil.applyDeadband(rotationalSupplier.getAsDouble(), 0.07);
+    driveSubsystem.getKDrive().arcadeDrive(translatePercentDeadbanded, rotationPercentDeadbanded);
   }
 
   // Called once the command ends or is interrupted.
